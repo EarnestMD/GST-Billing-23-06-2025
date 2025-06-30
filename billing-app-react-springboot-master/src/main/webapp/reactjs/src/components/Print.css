@@ -1,0 +1,53 @@
+@media print {
+    /* Hide elements that should not be printed */
+    .no-print, .no-print * {
+        display: none !important;
+    }
+
+    /* Hide everything on the page by default */
+    body * {
+        visibility: hidden;
+    }
+
+    /* Make only the invoice and its children visible */
+    #bill-invoice, #bill-invoice * {
+        visibility: visible;
+    }
+
+    /* Position the invoice to take the full page */
+    #bill-invoice {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    /* Override dark theme for printing */
+    #bill-invoice .card {
+        border: none !important;
+        background-color: white !important;
+        color: black !important;
+        box-shadow: none !important;
+    }
+
+    #bill-invoice .card-header {
+        border-bottom: 2px solid black !important;
+        font-size: 20px;
+        font-weight: bold;
+        color: black !important;
+    }
+
+    #bill-invoice .table, #bill-invoice .table *, #bill-invoice .bg-dark, #bill-invoice .text-white {
+        background-color: white !important;
+        color: black !important;
+        border-color: #6c757d !important;
+    }
+
+    #bill-invoice input {
+        border: none !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+}

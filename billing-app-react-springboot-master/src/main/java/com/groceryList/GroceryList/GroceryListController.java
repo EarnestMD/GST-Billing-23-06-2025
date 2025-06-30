@@ -1,50 +1,49 @@
 package com.groceryList.GroceryList;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.groceryList.resource.Resource;
 import com.groceryList.service.IService;
+import com.groceryList.dto.ItemRequestDTO;
+import com.groceryList.dto.ItemResponseDTO;
+import java.util.List;
 
 @RestController
 @RequestMapping("/items")
-@CrossOrigin(origins = "http://localhost:3000")
-public class GroceryListController implements Resource<Item>{
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", exposedHeaders = "Access-Control-Allow-Origin")
+public class GroceryListController { // No longer implements Resource<Item> directly, as its methods change
 	
 	@Autowired
-    private IService<Item> itemService;
+    private IService itemService; // Now uses the DTO-aware IService
 
-	@Override
-	public ResponseEntity<Item> findById(Long id) {
-		return new ResponseEntity<>(itemService.findById(id), HttpStatus.OK);
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ItemResponseDTO> findById(@PathVariable Long id) {
+		return ResponseEntity.ok(itemService.findById(id)); // Returns DTO
 	}
 
-	@Override
-	public ResponseEntity<Item> save(Item item) {
-		return new ResponseEntity<>(itemService.saveOrUpdate(item), HttpStatus.CREATED);
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ItemResponseDTO> createItem(@RequestBody ItemRequestDTO itemRequestDTO) {
+		return new ResponseEntity<>(itemService.createItem(itemRequestDTO), HttpStatus.CREATED); // Accepts DTO, returns DTO
 	}
 
-	@Override
-	public ResponseEntity<Item> update(Item item) {
-		return new ResponseEntity<>(itemService.saveOrUpdate(item), HttpStatus.OK);
+	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ItemResponseDTO> updateItem(@PathVariable Long id, @RequestBody ItemRequestDTO itemRequestDTO) {
+		return new ResponseEntity<>(itemService.updateItem(id, itemRequestDTO), HttpStatus.OK); // Accepts DTO, returns DTO
 	}
 
-	@Override
-	public ResponseEntity<String> deleteById(Long id) {
-		return new ResponseEntity<>(itemService.deleteById(id), HttpStatus.OK);
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> deleteById(@PathVariable("id") Long id) {
+		itemService.deleteById(id); // Service now returns void
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT); // Return 204 No Content
 	}
 
-	@Override
-	public ResponseEntity<Collection<Item>> findAll() {
-		return new ResponseEntity<>(itemService.findAll(), HttpStatus.OK);
-	}
-
-	@Override
-	public ResponseEntity<Collection<Item>> findAll(String searchText) {
-		return new ResponseEntity<>(itemService.findAll(searchText),HttpStatus.OK);
+	@GetMapping
+	public ResponseEntity<List<ItemResponseDTO>> findAll(@RequestParam(required = false) String searchText) {
+		if (searchText != null && !searchText.isEmpty()) {
+			return new ResponseEntity<>(itemService.findAll(searchText), HttpStatus.OK); // Returns List of DTOs
+		}
+		return new ResponseEntity<>(itemService.findAll(), HttpStatus.OK); // Returns List of DTOs
 	}
 }

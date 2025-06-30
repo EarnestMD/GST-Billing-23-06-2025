@@ -63,13 +63,13 @@ export default class ProductEntry extends Component {
 		axios.post("http://localhost:8081/rest/items",item)
 			.then(response => {
 			if(response.data != null){
+				this.setState(this.initialState);
 				this.setState({"show":true, "method":"post"});
 				setTimeout(() => this.setState({"show":false}),3000);
 			}else{
 				this.setState({"show":false});					
 			}
 		});
-		this.setState(this.initialState);
 	};
 	
 	itemChange = event => {

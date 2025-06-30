@@ -1,15 +1,17 @@
 package com.groceryList.service;
 
-import java.util.Collection;
+import com.groceryList.dto.ItemRequestDTO;
+import com.groceryList.dto.ItemResponseDTO;
+import java.util.List; // Changed from Collection
 
-public interface IService<T> {
-	Collection<T> findAll();
-	
-	T findById(Long id);
-	
-	T saveOrUpdate(T t);
-	
-	String deleteById(Long id);
-
-	Collection<T> findAll(String searchText);
+public interface IService { // No longer generic <T> for Item operations
+    ItemResponseDTO findById(Long id);
+    ItemResponseDTO createItem(ItemRequestDTO itemRequestDTO);
+    ItemResponseDTO updateItem(Long id, ItemRequestDTO itemRequestDTO);
+    void deleteById(Long id);
+    List<ItemResponseDTO> findAll();
+    List<ItemResponseDTO> findAll(String searchText);
 }
+
+//	Collection<T> findAll(String searchText);
+//}

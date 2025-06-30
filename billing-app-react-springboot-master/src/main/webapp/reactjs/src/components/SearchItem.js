@@ -56,6 +56,7 @@ export default class SearchItem extends Component{
 				product_price:product_price,
 				product_gst:product_gst,
 				quantity: quantity
+				
 		};
 		this.props.addItem(selectedItem);
 	}

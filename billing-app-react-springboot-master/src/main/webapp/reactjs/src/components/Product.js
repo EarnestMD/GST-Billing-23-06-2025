@@ -54,6 +54,7 @@ export default class Product extends Component {
 		axios.put("http://localhost:8081/rest/items",item)
 		.then(response => {
 			if(response.data != null){
+				this.setState(this.initialState);
 				this.setState({"show":true,"method":"put"});
 				setTimeout(() => this.setState({"show":false}),3000);
 				setTimeout(() => this.productEntry(),2000);
@@ -61,7 +62,6 @@ export default class Product extends Component {
 				this.setState({"show":false});					
 			}
 		});
-		this.setState(this.initialState);
 	};
 	
 	itemChange = event => {
