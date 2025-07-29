@@ -9,6 +9,7 @@ public class CartItemDTO {
     private BigDecimal productPrice;
     private BigDecimal productGst; // Using BigDecimal for precision
     private Integer quantity;
+    private double unitPrice;
 
     public Long getId() {
         return id;
@@ -37,6 +38,17 @@ public class CartItemDTO {
     public BigDecimal getProductPrice() {
         return productPrice;
     }
+    
+    // existing getters and setters
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
 
     public void setProductPrice(BigDecimal productPrice) {
         this.productPrice = productPrice;

@@ -1,4 +1,4 @@
-package com.groceryList.GroceryList;
+package com.groceryList.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,7 +11,7 @@ import com.groceryList.dto.ItemResponseDTO;
 import java.util.List;
 
 @RestController
-@RequestMapping("/items")
+@RequestMapping("/api/items")
 @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", exposedHeaders = "Access-Control-Allow-Origin")
 public class GroceryListController { // No longer implements Resource<Item> directly, as its methods change
 	

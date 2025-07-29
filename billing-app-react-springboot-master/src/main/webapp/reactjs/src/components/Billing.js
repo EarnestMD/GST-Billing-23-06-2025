@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SearchItem from './SearchItem';
-import axios from 'axios';
+import api from '../services/api';
 import MyToast from './MyToast';
 
 import { Card, Table, Button } from 'react-bootstrap';
@@ -52,7 +52,7 @@ export default class Billing extends Component {
 			quantity: item.quantity
 		}));
 
-		axios.post("http://localhost:8081/rest/api/bills/SaveBill", billData)
+		api.post("/bills/SaveBill", billData)
 			.then(response => {
 				console.log("Bill saved successfully:", response.data);
 				this.setState({ showToast: true, toastMessage: "Bill Saved Successfully!", toastType: "success" });

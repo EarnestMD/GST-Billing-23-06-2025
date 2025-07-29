@@ -1,6 +1,6 @@
 package com.groceryList.repository;
 
-import com.groceryList.model.Bill;
+import com.groceryList.models.Bill;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

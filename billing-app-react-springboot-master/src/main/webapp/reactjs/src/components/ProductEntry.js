@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Card,Form,Button,Col} from 'react-bootstrap';
 import MyToast from './MyToast';
-import axios from 'axios';
+import api from '../services/api';
 import ProductList from './ProductList';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSave,faPlusSquare,faUndo} from '@fortawesome/free-solid-svg-icons';
@@ -14,8 +14,8 @@ export default class ProductEntry extends Component {
 	
 	constructor(props){
 		super(props);
-		this.state = this.initialState;
 		this.state = {
+			...this.initialState,
 			show : false
 		};
 		this.itemChange = this.itemChange.bind(this);
@@ -30,7 +30,7 @@ export default class ProductEntry extends Component {
 	}
 	
 	findItemById = (itemId) => {
-		axios.get("http://localhost:8081/rest/items/"+itemId)
+		api.get("/items/"+itemId)
 			.then(response => {
 			if(response.data != null){
 				this.setState({
@@ -60,7 +60,7 @@ export default class ProductEntry extends Component {
 			product_gst: this.state.product_gst
 		};
 		
-		axios.post("http://localhost:8081/rest/items",item)
+		api.post("/items",item)
 			.then(response => {
 			if(response.data != null){
 				this.setState(this.initialState);
@@ -77,10 +77,6 @@ export default class ProductEntry extends Component {
 			[event.target.name]:event.target.value
 		});
 	};
-	
-	refreshPage = () => {
-		window.location.reload(false);
-	}
 	
 	render(){
 		
@@ -132,7 +128,7 @@ export default class ProductEntry extends Component {
 								  </Form.Row>
 							   </Card.Body>
 							   <Card.Footer style={{"textAlign":"right"}}>
-								<Button size="sm" variant="success" type="submit" onClick={this.refreshPage}>
+								<Button size="sm" variant="success" type="submit">
 									<FontAwesomeIcon icon={faSave}/>Save
 							    </Button>{' '}
 								<Button size="sm" variant="info" type="reset">

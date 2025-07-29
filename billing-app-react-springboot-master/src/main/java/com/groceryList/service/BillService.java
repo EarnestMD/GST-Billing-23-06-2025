@@ -1,8 +1,8 @@
 package com.groceryList.service;
 
 import com.groceryList.dto.CartItemDTO;
-import com.groceryList.model.Bill;
-import com.groceryList.model.BillItem;
+import com.groceryList.models.Bill;
+import com.groceryList.models.BillItem;
 import com.groceryList.repository.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

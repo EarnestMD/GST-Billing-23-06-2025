@@ -1,4 +1,4 @@
-package com.groceryList.model;
+package com.groceryList.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 

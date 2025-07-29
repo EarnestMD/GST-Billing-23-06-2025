@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Card,Form,Button,Col} from 'react-bootstrap';
 import MyToast from './MyToast';
-import axios from 'axios';
+import api from '../services/api';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSave,faList,faEdit} from '@fortawesome/free-solid-svg-icons';
 
@@ -24,7 +24,7 @@ export default class Product extends Component {
 	}
 	
 	findItemById = (itemId) => {
-		axios.get("http://localhost:8081/rest/items/"+itemId)
+		api.get("/items/"+itemId)
 			.then(response => {
 			if(response.data != null){
 				this.setState({
@@ -51,7 +51,7 @@ export default class Product extends Component {
 			product_gst: this.state.product_gst
 		};
 		
-		axios.put("http://localhost:8081/rest/items",item)
+		api.put("/items",item)
 		.then(response => {
 			if(response.data != null){
 				this.setState(this.initialState);

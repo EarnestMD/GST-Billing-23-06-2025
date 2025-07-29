@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.groceryList.model.Item; // Updated import path for Item
+import com.groceryList.models.Item; // Updated import path for Item
 
 @Repository
 public interface GroceryListRepository extends JpaRepository<Item, Long>{

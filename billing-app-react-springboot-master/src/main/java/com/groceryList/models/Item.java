@@ -1,4 +1,4 @@
-package com.groceryList.model;
+package com.groceryList.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

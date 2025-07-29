@@ -5,7 +5,7 @@ import com.groceryList.dto.ItemResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.groceryList.model.Item; // Corrected import path
+import com.groceryList.models.Item; // Corrected import path
 import com.groceryList.repository.GroceryListRepository;
 import com.groceryList.service.IService;
 

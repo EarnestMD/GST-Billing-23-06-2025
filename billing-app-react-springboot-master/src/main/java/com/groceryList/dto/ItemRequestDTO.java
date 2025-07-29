@@ -1,6 +1,6 @@
 package com.groceryList.dto;
 
-import com.groceryList.model.Item; // Assuming Item is now in com.groceryList.model
+import com.groceryList.models.Item; // Assuming Item is now in com.groceryList.model
 
 // This DTO is used for incoming requests (e.g., creating or updating an item)
 public class ItemRequestDTO {
