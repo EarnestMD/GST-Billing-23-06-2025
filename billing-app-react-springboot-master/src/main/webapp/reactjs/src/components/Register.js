@@ -5,6 +5,7 @@ import { useHistory, Link } from 'react-router-dom';
 const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState('user'); // Default role
     const [message, setMessage] = useState({ text: '', type: '' });
     const history = useHistory();
 
@@ -13,7 +14,7 @@ const Register = () => {
         setMessage({ text: '', type: '' });
 
         try {
-            await authService.register(username, password);
+            await authService.register(username, password, role);
             // Navigate to login page with a success message
             history.push('/login', {
                 message: 'Registration successful! Please log in.',
@@ -56,6 +57,22 @@ const Register = () => {
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
+                    </div>
+
+                    <div className="form-group mt-2">
+                        <label htmlFor="role">Role</label>
+                        <select
+                            className="form-control"
+                            name="role"
+                            value={role}
+                            onChange={(e) => setRole(e.target.value)}
+                        >
+                            <option value="user">User</option>
+                            <option value="cashier">Cashier</option>
+                            <option value="accountant">Accountant</option>
+                            <option value="stock_manager">Stock Manager</option>
+                            <option value="admin">Admin</option>
+                        </select>
                     </div>
 
                     <div className="form-group mt-3">
