@@ -13,3 +13,90 @@
 .margins {
 	margin: 20px;
 }
+
+@media screen {
+  .print-header {
+    display: none;
+  }
+}
+
+@media print {
+  /* A utility class to hide elements during printing */
+  .no-print {
+    display: none !important;
+  }
+
+  .print-header {
+    display: block;
+  }
+
+  /* Reset page styles for thermal printer output */
+  body {
+    margin: 0;
+    padding: 2mm;
+    background-color: #fff;
+    width: 72mm; /* Standard width for 3-inch thermal paper */
+    font-size: 8pt; /* A smaller font size suitable for receipts */
+  }
+
+  /* Ensure the main container doesn't add extra space */
+  .container {
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+  }
+
+  /* Style the printable bill area */
+  .printable-area, .printable-area * {
+    color: #000 !important;
+    background-color: #fff !important;
+    border-color: #999 !important;
+  }
+
+  .printable-area {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Make the table more compact */
+  .printable-area .table {
+    font-size: 7.5pt;
+  }
+
+  .printable-area .table th,
+  .printable-area .table td {
+    padding: 2px 3px;
+  }
+
+  .printable-area tfoot h3 {
+    font-size: 10pt;
+    margin: 0;
+  }
+  .info-border{
+	border-color: #17a2b8;
+}
+
+/* Print-specific styles */
+@media print {
+  /* Hide every element on the page by default */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Make the printable area and all its children visible */
+  .printable-area, .printable-area * {
+    visibility: visible;
+  }
+
+  /* Position the printable area to the top-left of the page */
+  .printable-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border: none !important; /* Remove the card border for printing */
+  }
+}
+
+
+}

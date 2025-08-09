@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {Card,Table,InputGroup,FormControl,ButtonGroup,Button} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faList,faEdit,faTrash,faStepBackward,faFastBackward,faStepForward,faFastForward} from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
+import api from '../services/api';
 import MyToast from './MyToast';
 import {Link} from 'react-router-dom';
 import './Style.css';
@@ -23,7 +23,7 @@ export default class ProductList extends Component {
 	}
 	
 	findAllItems(){
-		axios.get("http://localhost:8081/rest/items")
+		api.get("/items")
 			.then(response => response.data)
 			.then((data) => {
 				this.setState({items: data});
@@ -31,7 +31,7 @@ export default class ProductList extends Component {
 	};
 	
 	deleteItem = (itemId) => {
-		axios.delete("http://localhost:8081/rest/items/"+itemId)
+		api.delete("/items/"+itemId)
 			.then(response => {
 				if(response.data != null){
 					this.setState({"show":true});

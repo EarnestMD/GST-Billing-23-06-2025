@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 export default class NavigationBar extends Component{
 	render(){
 		return (
-			<Navbar bg="dark" variant="dark">
+			<Navbar bg="dark" variant="dark" className="no-print">
 				<Link to={""} className="navbar-brand">
 					<img src="./billing_app.jpg" width="40" height="40" alt="Brand"/>Billing App
 				</Link>

@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {Card,Table,InputGroup,FormControl,ButtonGroup,Button} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSearch,faPlus,faTimes} from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
+import api from '../services/api';
 
 export default class SearchItem extends Component{
 	
@@ -21,7 +21,7 @@ export default class SearchItem extends Component{
 	}
 	
 	findAllItems(){
-		axios.get("http://localhost:8081/rest/items")
+		api.get("/items")
 			.then(response => response.data)
 			.then((data) => {
 				this.setState({items: data});
@@ -39,7 +39,7 @@ export default class SearchItem extends Component{
 	};
 	
 	searchData = () => {
-		axios.get("http://localhost:8081/rest/items/search/"+this.state.search)
+		api.get("/items/search/"+this.state.search)
 			.then(response => response.data)
 			.then((data) => {
 				this.setState({
@@ -56,6 +56,7 @@ export default class SearchItem extends Component{
 				product_price:product_price,
 				product_gst:product_gst,
 				quantity: quantity
+				
 		};
 		this.props.addItem(selectedItem);
 	}
